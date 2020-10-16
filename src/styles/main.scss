@@ -1,0 +1,62 @@
+@import '~bulma/bulma.sass';
+
+body {
+  background-color: #d9ecf2;
+}
+
+
+// Landing
+.home {
+  background-image: url('../styles/assets/asteroid.png');
+  background-size: cover;
+  .hero-body .container .title {
+    display: inline-block;
+  }
+  .hero-body .container .title:first-child {
+    margin-right: 4px;
+  }
+}
+
+
+// Navbar
+.navbar {
+  background-color: #f1d4d4;
+}
+
+// Show single Asteroid
+.single-asteroid {
+  margin-left: 25%;
+  h1 {
+    margin-left: 5%;
+  }
+}
+
+// Footer
+.footer {
+  background-color: #d6d2c4;
+}
+
+.level{
+  margin-top: 3%;
+  margin-left: 25%;
+}
+
+.card-link {
+  color: #000000;
+}
+
+
+// Signup
+.signup {
+  width: 50%;
+  border: #000000 solid 3px;
+  form {
+    padding: 30px;
+  }
+}
+
+
+// All errors
+.error {
+  color: #ff0000;
+}

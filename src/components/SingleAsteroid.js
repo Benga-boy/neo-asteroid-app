@@ -12,9 +12,8 @@ const SingleAsteroid = () => {
   }
 
   // Function to handle submission of id to NASA API endpoint, then returns data
-  const handleSearch = e => {
-    e.preventDefault()
-    if (!asteroidId) {
+  const handleSearch = () => {
+    if (!asteroidId || ' ') {
       return setError('Please enter a valid id to search')
     }
     setError('')
@@ -38,18 +37,15 @@ const SingleAsteroid = () => {
     <div className="level-left">
       <div className="level-item has-text-centered">
         <p className="subtitle is-5">
-          <strong>Search</strong> Asteroids
+          <strong>Search</strong> Asteroid
       </p>
       </div>
       <div className="level-item">
         <div className="field has-addons">
           <p className="control">
-            <input className="input" type="text" placeholder="Find an Asteroid" onChange={handleIdChange} />
-            <small>*Please type in Asteroid id</small>
+            <input className="input" value={asteroidId} type="text" placeholder="Find an Asteroid" onChange={handleIdChange} />
+            { !error ? <small>*Please type in Asteroid id</small> : <small className="error">{error} </small> }
           </p>
-          {
-              error && <small className="error">{error}</small>
-            }
           <p className="control">
             <button onClick={handleSearch} className="button">
               Search
@@ -68,11 +64,8 @@ const SingleAsteroid = () => {
       {
         data === null ? (<Fragment>
           <section className="section is-medium">
-            <div className="container">
-              <h1 className="title has-text-centered">Section</h1>
-              <h2 className="subtitle has-text-centered">
-                A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
-              </h2>
+            <div className="container box">
+              <h1 className="title is-4 has-text-centered">Search for an Asteroid by typing in its ID above</h1>
             </div>
           </section>
         </Fragment>) : (<Fragment>

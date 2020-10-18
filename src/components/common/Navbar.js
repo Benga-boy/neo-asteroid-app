@@ -26,45 +26,41 @@ const Navbar = () => {
       }
     })
   }
-  
 
-// Function to handle user logout
-const handleLogout = () => {
-  firebase.auth().signOut()
-  history.push('/login')
-}
+
+  // Function to handle user logout
+  const handleLogout = () => {
+    firebase.auth().signOut()
+    window.alert('Goodbye and hope to see you soon')
+    history.push('/login')
+  }
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <Link to="/" className="navbar-item" >Home</Link>
+        <Link to="/" className="navbar-item logo" ><ion-icon name="planet-outline"></ion-icon></Link>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </div>
       <div className="navbar-end">
         <div className="navbar-item">
-          {
-            !user && <Link className="navbar-item" to="/signup" >
-            Signup
-          </Link>
-          }
-          {
-            !user && <Link className="navbar-item" to="/login" >
-            Login
-          </Link>
-          }
+          {user && <Link className="navbar-item" to="/favourites" >
+            Favourites
+          </Link>}
           <Link className="navbar-item" to="/asteroids" >
             Asteroids
           </Link>
           <Link className="navbar-item" to="/searchAsteroids" >
-            Search Asteroids
+            Search by date
           </Link>
           <Link className="navbar-item" to="/singleAsteroids" >
-            Single Asteroid
+            Search by id
           </Link>
           {
-            user && <div onClick={handleLogout} className="button">Logout</div>
+            !user ? (<Link className="navbar-item" to="/login" >
+              Login/Register
+            </Link>) : (<div onClick={handleLogout} className="navbar-item logout">Logout</div>)
           }
         </div>
       </div>

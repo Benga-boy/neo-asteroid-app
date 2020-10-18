@@ -7,7 +7,6 @@ const ShowSingleAsteroid = () => {
   // Get the asteroid id from the params id passed in
   const params = useParams()
 
-
   // Fetch the single asteroid, store in data then display to the user on mount
   useEffect(() => {
     fetch(`https://api.nasa.gov/neo/rest/v1/neo/${params.id}?api_key=${process.env.REACT_APP_API_KEY}`)

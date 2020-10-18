@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import {useHistory } from 'react-router-dom'
+import {Link, useHistory } from 'react-router-dom'
 
 const Login = () => {
 const [email, setEmail] = useState('')
@@ -32,6 +32,7 @@ const handleLoginSubmit = async e => {
   } catch (err) {
     setError(err.message)
   }
+  window.alert('Welcome back!')
 }
 
 
@@ -55,6 +56,10 @@ const handleLoginSubmit = async e => {
               </p>
             </div>
             <div className="field">
+              <p>
+                Dont have an account? Register <Link to="/signup">here</Link>
+                <br/><br/>
+              </p>
               <p className="control">
                 <button className="button is-success">
                   Login

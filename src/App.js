@@ -6,7 +6,8 @@ import Signup from './components/auth/Signup'
 import Footer from './components/common/Footer'
 import Landing from './components/common/Landing'
 import Navbar from './components/common/Navbar'
-import SearchAsteroids from './components/SearchAsteroids'
+import SearchByDate from './components/SearchByDate'
+import Favourites from './components/Favourites'
 import ShowSingleAsteroid from './components/ShowSingleAsteroid'
 import SingleAsteroid from './components/SingleAsteroid'
 
@@ -20,8 +21,9 @@ const App = () => {
         <Route exact path="/" component={Landing} />
         <Route exact path="/asteroids" component={Asteroids} />
         <Route exact path="/asteroids/:id" component={ShowSingleAsteroid} />
-        <Route exact path="/searchAsteroids" component={SearchAsteroids} />
+        <Route exact path="/searchAsteroids" component={SearchByDate} />
         <Route exact path="/singleAsteroids" component={SingleAsteroid} />
+        <Route exact path="/favourites" component={Favourites} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
       </Switch>

@@ -13,7 +13,7 @@ const SingleAsteroid = () => {
 
   // Function to handle submission of id to NASA API endpoint, then returns data
   const handleSearch = () => {
-    if (!asteroidId || ' ') {
+    if (!asteroidId) {
       return setError('Please enter a valid id to search')
     }
     setError('')
@@ -120,11 +120,6 @@ const SingleAsteroid = () => {
                     <p className="card-footer-item">
                       <span>
                         View on <a href={data.nasa_jpl_url} target="_blank" rel="noopener noreferrer">NASA</a>
-                      </span>
-                    </p>
-                    <p className="card-footer-item">
-                      <span>
-                        Share on
                       </span>
                     </p>
                   </footer>

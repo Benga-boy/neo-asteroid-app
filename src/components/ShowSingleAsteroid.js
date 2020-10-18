@@ -75,11 +75,6 @@ const ShowSingleAsteroid = () => {
                     View on <a href={data.nasa_jpl_url} target="_blank" rel="noopener noreferrer">NASA</a>
                   </span>
                 </p>
-                <p className="card-footer-item">
-                  <span>
-                    Share on
-                  </span>
-                </p>
               </footer>
             </div>
           </div>

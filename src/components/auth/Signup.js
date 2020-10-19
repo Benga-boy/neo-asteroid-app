@@ -5,46 +5,41 @@ import 'firebase/auth'
 import { useHistory } from 'react-router-dom'
 
 const Signup = () => {
-const [name, setName] = useState('')
-const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
+const [formData, setFormData] = useState({
+  name: '',
+  email: '',
+  password: ''
+})
 const [error, setError] = useState(null)
 
 
 // History required to push user to asteroid page upon successful signup
 const history = useHistory()
 
-// Function to handle name input change
-const handleNameInput = e => {
-  setName(e.target.value)
-}
 
-// Function to handle email input change
-const handleEmailInput = e => {
-  setEmail(e.target.value)
-}
-
-// Function to handle password input change
-const handlePasswordInput = e => {
-  setPassword(e.target.value)
+// Function to handle formData input change
+const handleFormDataInput = e => {
+  setFormData({...formData, [e.target.name]: e.target.value})
 }
 
 
 // Function to sign user up and create a user record for that user in firebase
 const handleSignupSubmit = async e => {
   e.preventDefault()
-  let ref = db.collection('users').doc(email)
+  let ref = db.collection('users').doc(formData.email)
   try {
-    const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
+    const user = await firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
     await ref.set({
-      name: name,
+      name: formData.name,
       favAsteroids: [],
       user_id: user.user.uid
     })
-    setName('')
-    setEmail('')
-    setPassword('')
-    window.alert(`Welcome ${name}`)
+    setFormData({
+      name: '',
+      email: '',
+      password: ''
+    })
+    window.alert(`Welcome ${formData.name}`)
     history.push('/asteroids')
   } catch (err) {
     setError(err.message)
@@ -62,17 +57,17 @@ const handleSignupSubmit = async e => {
           <form onSubmit={handleSignupSubmit} >
             <div className="field">
               <p className="control has-icons-left">
-                <input className="input" onChange={handleNameInput} type="text" placeholder="Name" value={name} />
+                <input name="name" className="input" onChange={handleFormDataInput} type="text" placeholder="Name" value={formData.name} />
               </p>
             </div>
             <div className="field">
               <p className="control has-icons-left has-icons-right">
-                <input className="input" onChange={handleEmailInput} type="email" placeholder="Email" value={email} />
+                <input name="email" className="input" onChange={handleFormDataInput} type="email" placeholder="Email" value={formData.email} />
               </p>
             </div>
             <div className="field">
               <p className="control has-icons-left">
-                <input className="input" onChange={handlePasswordInput} type="password" placeholder="Password" value={password} />
+                <input name="password" className="input" onChange={handleFormDataInput} type="password" placeholder="Password" value={formData.password} />
               </p>
             </div>
             <div className="field">

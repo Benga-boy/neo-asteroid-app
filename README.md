@@ -6,7 +6,7 @@
 
 ## Deployed project - 
 
-## Tech Stack - React.js and Firebase
+## Tech Stack - React.js(hooks) and Firebase
 
 ## 3rd party Libraries - Bulma and CSS Animator
 

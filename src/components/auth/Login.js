@@ -4,30 +4,29 @@ import 'firebase/auth'
 import {Link, useHistory } from 'react-router-dom'
 
 const Login = () => {
-const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
+const [formData, setFormData] = useState({
+  email: '',
+  password: ''
+})
 const [error, setError] = useState(null)
 
 // History to push user to asteroids page upon successful login
 const history = useHistory()
 
-// Function to handle email input change
-const handleEmailInput = e => {
-  setEmail(e.target.value)
-}
-
-// Function to handle password input change
-const handlePasswordInput = e => {
-  setPassword(e.target.value)
+// Function to handle form data input change
+const handleFormDataInput = e => {
+  setFormData({...formData, [e.target.name]: e.target.value})
 }
 
 // Function to handle user login submission to firebase
 const handleLoginSubmit = async e => {
   e.preventDefault()
   try {
-    await firebase.auth().signInWithEmailAndPassword(email, password)
-    setEmail('')
-    setPassword('')
+    await firebase.auth().signInWithEmailAndPassword(formData.email, formData.password)
+    setFormData({
+      email: '',
+      password: ''
+    })
     window.alert('Welcome back!')
     history.push('/asteroids')
   } catch (err) {
@@ -47,12 +46,12 @@ const handleLoginSubmit = async e => {
           <form onSubmit={handleLoginSubmit} >
             <div className="field">
               <p className="control has-icons-left has-icons-right">
-                <input className="input" onChange={handleEmailInput} type="email" placeholder="Email" value={email} />
+                <input name="email" className="input" onChange={handleFormDataInput} type="email" placeholder="Email" value={formData.email} />
               </p>
             </div>
             <div className="field">
               <p className="control has-icons-left">
-                <input className="input" onChange={handlePasswordInput} type="password" placeholder="Password" value={password} />
+                <input name="password" className="input" onChange={handleFormDataInput} type="password" placeholder="Password" value={formData.password} />
               </p>
             </div>
             <div className="field">

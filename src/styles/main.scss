@@ -31,7 +31,7 @@ hr {
 .navbar {
   background-color: #16213e;
   .navbar-item {
-    color: #ffffff;
+    color: #dd2c00;
   }
   .logo {
     font-size: 50px;
@@ -106,6 +106,7 @@ hr {
 .error {
   color: #ff0000;
 }
+
 
 // ? MEDIA QUERY FOR MOBILE
 @media (min-width: 360px) and (max-width: 667px) and (orientation: portrait) {

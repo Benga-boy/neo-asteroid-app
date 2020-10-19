@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
 const Navbar = () => {
   const [user, setUser] = useState(null)
   const [isOpen, setIsOpen] = useState(false)
+  const {pathname} = useLocation()
 
   // History required to push user to sign in page upon loggng out
   const history = useHistory()
@@ -13,7 +14,8 @@ const Navbar = () => {
   // Check if user is logged in or not on mount!
   useEffect(() => {
     authListener()
-  }, [])
+    setIsOpen(false)
+  }, [pathname])
 
 
   // Check if a user is signed in or not!

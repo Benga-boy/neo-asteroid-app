@@ -38,6 +38,7 @@ export const Asteroids = () => {
   data.map(item => item.image = images[Math.floor(Math.random() * images.length)].image)
 
   // Find the user record and then update it with their favourite asteroid
+  // Also check the user record to see if the asteroid is already in they favArray and return alert to let user know its already added
   const favouriteAsteroid = item => {
     if (!user) {
       window.alert('You must sign up or login to add Asteroid to favourites!')
@@ -46,14 +47,19 @@ export const Asteroids = () => {
     db.collection('users').where('user_id', '==', user.uid).get()
       .then(snapshot => {
         snapshot.forEach((doc) => {
+          const usersArray = doc.data().favAsteroids.findIndex(ast => ast.id === item.id)
+          if (usersArray === -1) {
           db.collection('users').doc(doc.id).update({
             favAsteroids: arrayUnion(item)
           })
+          window.alert('Added to favourites')
+          } else {
+            window.alert('Already in your favourites')
+          }
         })
       }).catch(err => {
         console.log(err)
       })
-    window.alert('Added to favourites')
   }
 
   return (

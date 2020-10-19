@@ -7,8 +7,10 @@ import images from '../styles/assets/image'
 
 const SearchByDate = () => {
   const [data, setData] = useState(null)
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
+  const [formData, setFormData] = useState({
+    startDate: '',
+    endDate: ''
+  })
   const [user, setUser] = useState({})
 
   // check to see if there is a user logged in on mount
@@ -16,29 +18,25 @@ const SearchByDate = () => {
     authListener()
   }, [])
 
-  //Function to handle start date input change
-  const handleStartDateChange = e => {
-    setStartDate(e.target.value)
-  }
-
-
-  // Function to handle end date input change
-  const handleEndDateChange = e => {
-    setEndDate(e.target.value)
+  //Function to handle date changes
+  const handleDateChanges = e => {
+    setFormData({...formData, [e.target.name]: e.target.value})
   }
 
   // Function to handle submission of dates to api endpoint then return data
   const handleDateQuerySubmit = async e => {
     e.preventDefault()
-    fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&detailed=true&api_key=${process.env.REACT_APP_API_KEY}`)
+    fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${formData.startDate}&end_date=${formData.endDate}&detailed=true&api_key=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
       .then(json => {
         setData(json.near_earth_objects)
       }).catch(err => {
         console.log(err)
       })
-    setStartDate('')
-    setEndDate('')
+      setFormData({
+        startDate: '',
+        endDate: ''
+      })
   }
 
   // Function check if a user is signed in or not!
@@ -75,21 +73,30 @@ const SearchByDate = () => {
   limitedAsteroids = limitedAsteroids.slice(0, 10)
 
   // Find the user record and then update it with their favourite asteroid
+  // Also check the user record to see if the asteroid is already in they favArray and return alert to let user know its already added
   const favouriteAsteroid = item => {
+    if (!user) {
+      window.alert('You must sign up or login to add Asteroid to favourites!')
+    }
+    console.log(user)
     const arrayUnion = firebase.firestore.FieldValue.arrayUnion
     db.collection('users').where('user_id', '==', user.uid).get()
       .then(snapshot => {
         snapshot.forEach((doc) => {
+          const usersArray = doc.data().favAsteroids.findIndex(ast => ast.id === item.id)
+          if (usersArray === -1) {
           db.collection('users').doc(doc.id).update({
             favAsteroids: arrayUnion(item)
           })
+          window.alert('Added to favourites')
+          } else {
+            window.alert('Already in your favourites')
+          }
         })
       }).catch(err => {
         console.log(err)
       })
-    window.alert('Added to favourites')
   }
-
 
   return (
     <Fragment>
@@ -105,7 +112,7 @@ const SearchByDate = () => {
               <div className="level-item">
                 <div className="field has-addons">
                   <p className="control">
-                    <input className="input" type="date" onChange={handleStartDateChange} value={startDate} />
+                    <input className="input" type="date" name="startDate" onChange={handleDateChanges} value={formData.startDate} />
                   </p>
                 </div>
               </div>
@@ -121,7 +128,7 @@ const SearchByDate = () => {
               <div className="level-item">
                 <div className="field has-addons">
                   <p className="control">
-                    <input className="input" type="date" onChange={handleEndDateChange} value={endDate} />
+                    <input className="input" name="endDate" type="date" onChange={handleDateChanges} value={formData.endDate} />
                   </p>
                 </div>
               </div>
@@ -133,7 +140,7 @@ const SearchByDate = () => {
       <hr />
       {/* Check if data is true. if !true, display info telling the user how to fetch the data, if true, display the asteroids returned */}
       {
-        data === null ? (<Fragment>
+        data === null || data === undefined ? (<Fragment>
           <div className="no-favs">
             <section className="section is-medium instructions">
               <div className="container box">

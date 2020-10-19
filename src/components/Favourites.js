@@ -7,11 +7,17 @@ import { Link } from 'react-router-dom'
 const Favourites = () => {
   const [data, setData] = useState(null)
   const [user, setUser] = useState(null)
-
+  
 
   // On mount, check to make sure theres a user. If user, then get their favourites from the cloud database
   useEffect(() => {
     authListener()
+    fetchData()
+  }, [user])
+
+  // Function to fetch favourite asteroid data from users record
+  // ! Added in this manner to rerender the page after the remove favourite function is called
+  const fetchData  = () => {
     if (user) {
       db.collection('users').where('user_id', '==', user.uid).get()
         .then(snapshot => {
@@ -22,7 +28,7 @@ const Favourites = () => {
           console.log(err)
         })
     }
-  }, [user])
+  }
 
   // Function check if a user is signed in or not
   const authListener = () => {
@@ -34,6 +40,27 @@ const Favourites = () => {
       }
     })
   }
+
+  // Function to remove favourite item from array of favAsteroids
+  const removeFavourite = item => {
+    const arrayDelete = firebase.firestore.FieldValue.arrayRemove
+    db.collection('users').where('user_id', '==', user.uid).get()
+    .then(snapshot => {
+      snapshot.forEach((doc) => {
+        const favToRemove = doc.data().favAsteroids.findIndex(ast => ast.id === item.id)
+        if (favToRemove === -1) {
+          window.alert('Asteroid not found')
+        } else {
+          db.collection('users').doc(doc.id).update({
+            favAsteroids: arrayDelete(item)
+          })
+          window.alert('Asteroid removed from favourites')
+          fetchData()
+        }
+      })
+    })
+  }
+
 
   if (!data) return <h1>You have no favourites</h1>
 
@@ -81,6 +108,11 @@ const Favourites = () => {
                         <span>
                           View on <a href={item.nasa_jpl_url} target="_blank" rel="noopener noreferrer" >NASA</a>
                         </span>
+                      </p>
+                      <p className="card-footer-item">
+                        <button className="button is-small is-dark" onClick={() => removeFavourite(item)} >
+                          Remove favourite
+                        </button>
                       </p>
                     </footer>
                   </div>

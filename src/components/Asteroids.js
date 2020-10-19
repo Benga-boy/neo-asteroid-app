@@ -12,7 +12,7 @@ export const Asteroids = () => {
   // on mount fetch my list of asteroids and store then in array of data then display them
   // Also check to see if there is a user logged in on mount
   useEffect(() => {
-    fetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?page=1&size=10&api_key=${process.env.REACT_APP_API_KEY}`)
+    fetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?page=${Math.floor(Math.random() * 100)}&size=10&api_key=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
       .then(json => {
         setData(json.near_earth_objects)
@@ -33,6 +33,8 @@ export const Asteroids = () => {
   }
 
   if (!data) return <h1>Loading....</h1>
+
+  console.log(data)
 
   // Add a random image to each Asteroid data
   data.map(item => item.image = images[Math.floor(Math.random() * images.length)].image)

@@ -83,7 +83,7 @@ const SingleAsteroid = () => {
                     </p>
                     <hr />
                     <p className="subtitle">
-                      <strong>Description: </strong>{data.orbital_data.orbit_class.orbit_class_description}
+                      <strong>Description: </strong>{data.orbital_data.orbit_class ?  data.orbital_data.orbit_class.orbit_class_description : 'N/A'}
                     </p>
                     <hr />
                     {

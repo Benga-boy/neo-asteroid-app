@@ -22,7 +22,7 @@ const AsteroidCard = ({ item, addFavorite, user }) => {
               <hr />
               <p className="subtitle">
                 <strong>Description: </strong> <br />
-                {item.orbital_data.orbit_class.orbit_class_description}
+                {item.orbital_data.orbit_class ?  item.orbital_data.orbit_class.orbit_class_description : 'N/A'}
               </p>
           </div>
           </Link>

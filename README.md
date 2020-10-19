@@ -4,7 +4,8 @@
 3. Create a mechanism for searching a specific asteroid based on its ID.
 4. Add user login/sign up and allow a user to save their favourite asteroids to their account
 
-## Deployed project - 
+## Deployed project - https://neo-interview-assessment.web.app/
+
 
 ## Tech Stack - React.js(hooks) and Firebase
 
@@ -14,7 +15,9 @@
 * I Tested out all the api endpoints in Insomnia to make sure I was getting back the correct data and also to get familiar with the data.
 * Create React app using the GA React template generator
 * The next step is to fetch the data in Asteroids.js and console logging it the ensure I was getting back the correct data.
+* I decided not to use axios to fetch my data just to keep things a bit vanilla.
 * To then complete task 1, displayed the the data in the UI using bulma cards. Also, add a feature that allows the to click on an Asteroid card, taking them to the single page for that Asteroid, displaying more info.
+* Data has no image property, so append image property at random to the returned data
 * Task 1 complete with added feature.
 * To finish off on day one. Write the fuunction to fetch the data for Task 2 and Task 3, logging them unto the console. 
 
@@ -39,5 +42,61 @@
 * User signup and login completed. Move on to creating function to allow user add an asteroid to their favourite asteroids array.
 * Firstly check to make sure the user is logged in. If they are, set the logged in user to a user-state
 * Create a function that searches for that users record in the collection of users then update the favAsteroids array. 
-* Found userful resource that explains how to push a new item into an array in firebase without replacing the useful element. Link - https://fireship.io/lessons/firestore-array-queries-guide/
+* Found userful resource that explains how to push a new item into an array in firebase without replacing the useful element. Link - https://fireship.io/lessons/firestore-array-queries-guide/. See code below -
+```
+  const favouriteAsteroid = item => {
+    if (!user) {
+      window.alert('You must sign up or login to add Asteroid to favourites!')
+    }
+    const arrayUnion = firebase.firestore.FieldValue.arrayUnion
+    db.collection('users').where('user_id', '==', user.uid).get()
+      .then(snapshot => {
+        snapshot.forEach((doc) => {
+          const usersArray = doc.data().favAsteroids.findIndex(ast => ast.id === item.id)
+          if (usersArray === -1) {
+          db.collection('users').doc(doc.id).update({
+            favAsteroids: arrayUnion(item)
+          })
+          toast.success('Added to favourites')
+          } else {
+            toast.warning('Already in your favourites')
+          }
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+```
+* All 4 tasks completed and MVP reached. Spend some some work on the UI
+
+## Day four
+* Add a favourites page to display the users favourite astroid *Additional feature. 
+* Handle errors and display the error messages to the user.
+* I noticed that the catch block is not returning error messages especially in the search by date component
+* Manually handle errors myself
+* Make sure the user is not adding duplicate Asteroids into favourites
+* Add another feature to allow the user remove an Asteroid from their favourites 
+```
+  const removeFavourite = item => {
+    const arrayDelete = firebase.firestore.FieldValue.arrayRemove
+    db.collection('users').where('user_id', '==', user.uid).get()
+    .then(snapshot => {
+      snapshot.forEach((doc) => {
+        const favToRemove = doc.data().favAsteroids.findIndex(ast => ast.id === item.id)
+        if (favToRemove === -1) {
+          toast.warning('Asteroid not found')
+        } else {
+          db.collection('users').doc(doc.id).update({
+            favAsteroids: arrayDelete(item)
+          })
+          toast.success('Asteroid removed from favourites')
+          fetchData()
+        }
+      })
+    })
+  }
+```
+* Add more styling and media query for mobile * Additional feature
+* Make the navbar responsive also
+* Revise code and refactor where possible.
 

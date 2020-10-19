@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import {Link, useHistory } from 'react-router-dom'
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 const [formData, setFormData] = useState({
@@ -27,7 +29,7 @@ const handleLoginSubmit = async e => {
       email: '',
       password: ''
     })
-    window.alert('Welcome back!')
+    toast.success('Welcome back!')
     history.push('/asteroids')
   } catch (err) {
     setError(err.message)
@@ -38,6 +40,7 @@ const handleLoginSubmit = async e => {
   return (
     <Fragment>
       <section className="section is-medium login">
+        <ToastContainer />
         <h1 className="has-text-centered title">Login</h1>
         {
           error && <p className="has-text-centered error">{error}</p>

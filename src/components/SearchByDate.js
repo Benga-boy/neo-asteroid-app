@@ -4,6 +4,8 @@ import firebase from 'firebase/app'
 import db from '../config/firebase'
 import 'firebase/auth'
 import images from '../styles/assets/image'
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const SearchByDate = () => {
   const [data, setData] = useState(null)
@@ -76,7 +78,7 @@ const SearchByDate = () => {
   // Also check the user record to see if the asteroid is already in they favArray and return alert to let user know its already added
   const favouriteAsteroid = item => {
     if (!user) {
-      window.alert('You must sign up or login to add Asteroid to favourites!')
+      toast.warning('You must sign up or login to add Asteroid to favourites!')
     }
     console.log(user)
     const arrayUnion = firebase.firestore.FieldValue.arrayUnion
@@ -88,9 +90,9 @@ const SearchByDate = () => {
           db.collection('users').doc(doc.id).update({
             favAsteroids: arrayUnion(item)
           })
-          window.alert('Added to favourites')
+          toast.success('Added to favourites')
           } else {
-            window.alert('Already in your favourites')
+            toast.warning('Already in your favourites')
           }
         })
       }).catch(err => {
@@ -153,6 +155,7 @@ const SearchByDate = () => {
           </div>
         </Fragment>) : (<Fragment>
           <section className="show-all section asteroids-index">
+            <ToastContainer />
             <div className="container">
               <div className="columns is-multiline">
                 {limitedAsteroids && limitedAsteroids.map(item => <AsteroidCard key={item.id} item={item} addFavorite={favouriteAsteroid} user={user} />)

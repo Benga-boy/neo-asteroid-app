@@ -3,6 +3,8 @@ import firebase from 'firebase/app'
 import db from '../config/firebase'
 import 'firebase/auth'
 import { Link } from 'react-router-dom'
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Favourites = () => {
   const [data, setData] = useState(null)
@@ -49,12 +51,12 @@ const Favourites = () => {
       snapshot.forEach((doc) => {
         const favToRemove = doc.data().favAsteroids.findIndex(ast => ast.id === item.id)
         if (favToRemove === -1) {
-          window.alert('Asteroid not found')
+          toast.warning('Asteroid not found')
         } else {
           db.collection('users').doc(doc.id).update({
             favAsteroids: arrayDelete(item)
           })
-          window.alert('Asteroid removed from favourites')
+          toast.success('Asteroid removed from favourites')
           fetchData()
         }
       })
@@ -76,6 +78,7 @@ const Favourites = () => {
         </div>
       </Fragment>) : (
           <section className="show-all section asteroids-index">
+            <ToastContainer />
             <div className="container">
               <h1 className="title has-text-centered is-1">
                 Favourite Asteroids

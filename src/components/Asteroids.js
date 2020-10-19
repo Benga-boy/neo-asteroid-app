@@ -4,6 +4,8 @@ import firebase from 'firebase/app'
 import db from '../config/firebase'
 import 'firebase/auth'
 import images from '../styles/assets/image'
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Asteroids = () => {
   const [data, setData] = useState(null)
@@ -52,9 +54,9 @@ export const Asteroids = () => {
           db.collection('users').doc(doc.id).update({
             favAsteroids: arrayUnion(item)
           })
-          window.alert('Added to favourites')
+          toast.success('Added to favourites')
           } else {
-            window.alert('Already in your favourites')
+            toast.warning('Already in your favourites')
           }
         })
       }).catch(err => {
@@ -64,6 +66,7 @@ export const Asteroids = () => {
 
   return (
     <section className="show-all section asteroids-index">
+      <ToastContainer />
       <div className="container">
         <h1 className="title has-text-centered is-1">
           Asteroids

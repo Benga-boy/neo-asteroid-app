@@ -3,6 +3,8 @@ import db from '../../config/firebase'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { useHistory } from 'react-router-dom'
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
 const [formData, setFormData] = useState({
@@ -39,7 +41,7 @@ const handleSignupSubmit = async e => {
       email: '',
       password: ''
     })
-    window.alert(`Welcome ${formData.name}`)
+    toast.success(`Welcome ${formData.name}`)
     history.push('/asteroids')
   } catch (err) {
     setError(err.message)
@@ -49,6 +51,7 @@ const handleSignupSubmit = async e => {
   return (
     <Fragment>
       <section className="section is-medium register">
+        <ToastContainer />
         <h1 className="has-text-centered title">Signup Here</h1>
         {
           error && <p className="has-text-centered error">{error}</p>

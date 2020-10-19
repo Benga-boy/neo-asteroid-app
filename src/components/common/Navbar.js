@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
   const [user, setUser] = useState(null)
@@ -38,12 +40,13 @@ const Navbar = () => {
   // Function to handle user logout
   const handleLogout = () => {
     firebase.auth().signOut()
-    window.alert('Goodbye and hope to see you soon')
+    toast.warning('Goodbye and hope to see you soon')
     history.push('/login')
   }
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
+      <ToastContainer />
       <div className="navbar-brand">
         <Link to="/" className="navbar-item logo" ><ion-icon name="planet-outline"></ion-icon></Link>
         <span onClick={handleToggle} className={`navbar-burger ${isOpen ? 'is-active' : ''}`}>

@@ -185,7 +185,7 @@ hr {
 
   // Login
   .login {
-    margin-top: 6rem;
+    margin-top: 7.5rem;
     .title {
       font-size: 1.2rem;
     }
@@ -206,11 +206,15 @@ hr {
 
   //Register
   .register {
+    margin-top: 12.2rem;
     .title {
       font-size: 1.2rem;
+      margin-top: -4rem;
     }
     .container {
       width: 90%;
+      margin-bottom: 4rem;
+      margin-top: -2;
       input {
         height: 2rem;
       }

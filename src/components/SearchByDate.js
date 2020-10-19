@@ -134,14 +134,16 @@ const SearchByDate = () => {
       {/* Check if data is true. if !true, display info telling the user how to fetch the data, if true, display the asteroids returned */}
       {
         data === null ? (<Fragment>
-          <section className="section is-medium instructions">
-            <div className="container box">
-              <h1 className="title is-4 has-text-centered">Search for a list of Near Earth Objects within a date range</h1>
-              <h2 className=" error subtitle has-text-centered">
-                Please note, the max range is 7 days
+          <div className="no-favs">
+            <section className="section is-medium instructions">
+              <div className="container box">
+                <h1 className="title is-4 has-text-centered">Search for a list of Near Earth Objects within a date range</h1>
+                <h2 className=" error subtitle has-text-centered">
+                  Please note, the max range is 7 days
               </h2>
-            </div>
-          </section>
+              </div>
+            </section>
+          </div>
         </Fragment>) : (<Fragment>
           <section className="show-all section asteroids-index">
             <div className="container">

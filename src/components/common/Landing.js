@@ -3,7 +3,7 @@ import React from 'react'
 const Landing = () => {
   return (
     <div>
-      <section className="hero is-link is-fullheight-with-navbar home">
+      <section className="hero is-link is-fullheight home">
         <div className="hero-body">
           <div className="container">
             <p className="title is-3">

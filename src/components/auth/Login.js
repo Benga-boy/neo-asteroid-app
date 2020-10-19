@@ -28,17 +28,17 @@ const handleLoginSubmit = async e => {
     await firebase.auth().signInWithEmailAndPassword(email, password)
     setEmail('')
     setPassword('')
+    window.alert('Welcome back!')
     history.push('/asteroids')
   } catch (err) {
     setError(err.message)
   }
-  window.alert('Welcome back!')
 }
 
 
   return (
     <Fragment>
-      <section className="section is-medium">
+      <section className="section is-medium login">
         <h1 className="has-text-centered title">Login</h1>
         {
           error && <p className="has-text-centered error">{error}</p>
@@ -56,8 +56,8 @@ const handleLoginSubmit = async e => {
               </p>
             </div>
             <div className="field">
-              <p>
-                Dont have an account? Register <Link to="/signup">here</Link>
+              <p className="login-signup">
+                Dont have an account? Signup <Link to="/signup">here</Link>
                 <br/><br/>
               </p>
               <p className="control">

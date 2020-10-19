@@ -34,8 +34,6 @@ export const Asteroids = () => {
 
   if (!data) return <h1>Loading....</h1>
 
-  console.log(data)
-
   // Add a random image to each Asteroid data
   data.map(item => item.image = images[Math.floor(Math.random() * images.length)].image)
 
@@ -59,7 +57,7 @@ export const Asteroids = () => {
   }
 
   return (
-    <section className="show-all section">
+    <section className="show-all section asteroids-index">
       <div className="container">
         <h1 className="title has-text-centered is-1">
           Asteroids

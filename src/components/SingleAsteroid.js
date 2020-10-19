@@ -27,27 +27,24 @@ const SingleAsteroid = () => {
           setError('Please enter a valid id to search')
         }
       })
-      setId('')
+    setId('')
   }
 
 
   // Store search bar in a variable to be reusable when no search is made and when one is made. This will stop data returning null before a search is made
   // ! Didnt need this in the end but decided to keep as it still renders perfectly on page.
-  const searchBar = <nav className="level">
+  const searchBar = <nav className="level search-by-id-top">
     <div className="level-left">
       <div className="level-item has-text-centered">
-        <p className="subtitle is-5">
-          <strong>Search</strong> Asteroid
-      </p>
       </div>
       <div className="level-item">
         <div className="field has-addons">
           <p className="control">
-            <input className="input" value={asteroidId} type="text" placeholder="Find an Asteroid" onChange={handleIdChange} />
-            { !error ? <small>*Please type in Asteroid id</small> : <small className="error">{error} </small> }
+            <input className="input is-medium" value={asteroidId} type="text" placeholder="Find an Asteroid" onChange={handleIdChange} />
+            {!error ? <small>*Please type in Asteroid id</small> : <small className="error">{error} </small>}
           </p>
           <p className="control">
-            <button onClick={handleSearch} className="button">
+            <button onClick={handleSearch} className="button is-medium">
               Search
             </button>
           </p>
@@ -60,14 +57,16 @@ const SingleAsteroid = () => {
   return (
     <div>
       {searchBar}
-      <hr/>
+      <hr />
       {
         data === null ? (<Fragment>
-          <section className="section is-medium">
-            <div className="container box">
-              <h1 className="title is-4 has-text-centered">Search for an Asteroid by typing in its ID above</h1>
-            </div>
-          </section>
+          <div className="no-favs">
+            <section className="section is-medium">
+              <div className="container box">
+                <h1 className="title is-4 has-text-centered">Search for an Asteroid by typing in its ID above</h1>
+              </div>
+            </section>
+          </div>
         </Fragment>) : (<Fragment>
           <section className="section is-medium">
             <div className="container single-asteroid">
@@ -83,7 +82,7 @@ const SingleAsteroid = () => {
                     </p>
                     <hr />
                     <p className="subtitle">
-                      <strong>Description: </strong>{data.orbital_data.orbit_class ?  data.orbital_data.orbit_class.orbit_class_description : 'N/A'}
+                      <strong>Description: </strong>{data.orbital_data.orbit_class ? data.orbital_data.orbit_class.orbit_class_description : 'N/A'}
                     </p>
                     <hr />
                     {

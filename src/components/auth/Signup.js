@@ -44,17 +44,17 @@ const handleSignupSubmit = async e => {
     setName('')
     setEmail('')
     setPassword('')
+    window.alert(`Welcome ${name}`)
     history.push('/asteroids')
   } catch (err) {
     setError(err.message)
   }
-  window.alert(`Welcome ${name}`)
 }
 
   return (
     <Fragment>
-      <section className="section is-medium">
-        <h1 className="has-text-centered title">Register Here</h1>
+      <section className="section is-medium register">
+        <h1 className="has-text-centered title">Signup Here</h1>
         {
           error && <p className="has-text-centered error">{error}</p>
         }

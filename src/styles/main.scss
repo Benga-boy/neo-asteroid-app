@@ -96,7 +96,7 @@ hr {
   }
 }
 
-.login {
+.login-card-footer {
   margin: auto;
   padding: 10px;
 }
@@ -105,4 +105,166 @@ hr {
 // All errors
 .error {
   color: #ff0000;
+}
+
+// ? MEDIA QUERY FOR MOBILE
+@media (min-width: 360px) and (max-width: 667px) and (orientation: portrait) {
+  // Asteroids Index
+  .asteroids-index {
+    .columns {
+      width: 80%;
+      margin: auto;
+    }
+    .title {
+      font-size: 2rem;
+    }
+  }
+
+  // Asteroid card
+  .asteroid-card {
+    .card-footer p, p {
+      font-size: 1rem;
+    }
+  }
+
+  // Footer 
+  .footer {
+    height: 7rem;
+    p {
+      font-size: 0.8rem;
+    }
+  }
+
+  // Search by date
+  .search-by-date-top {
+    // .columns {
+    //   margin: auto;
+    // }
+    .subtitle {
+      font-size: 0.9rem;
+    }
+  }
+  .instructions {
+    width: 100%;
+    .container {
+      width: 100%;
+      .title {
+        font-size: 1.2rem;
+        width: 100%;
+      }
+      .subtitle {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  // Search by id
+  .search-by-id-top {
+    .level-left {
+      margin-right: 6rem;
+      p {
+        font-size: 0.9rem;
+      }
+      small {
+        font-size: 0.6rem;
+      }
+    }
+    input {
+      width: 8.5rem;
+      height: 2rem;
+    }
+    input::placeholder {
+      font-size: 0.8rem;
+    }
+    .button {
+      height: 2rem;
+      font-size: 0.8rem;
+      width: 5rem;
+    }
+  }
+
+  // Login
+  .login {
+    margin-top: 6rem;
+    .title {
+      font-size: 1.2rem;
+    }
+    .container {
+      width: 90%;
+      margin-bottom: 5rem;
+      input {
+        height: 2rem;
+      }
+      input::placeholder {
+        font-size: 0.8rem;
+      }
+      .login-signup {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  //Register
+  .register {
+    .title {
+      font-size: 1.2rem;
+    }
+    .container {
+      width: 90%;
+      input {
+        height: 2rem;
+      }
+      input::placeholder {
+        font-size: 0.8rem;
+      }
+  }
+}
+
+// Navbar
+.navbar {
+  .logo {
+    color: #ffffff;
+  }
+  .navbar-menu .navbar-item {
+    color: #000000;
+  }
+}
+
+// Landing
+.home {
+  margin: 0;
+}
+.hero-body .container .title {
+  font-size: 1.6rem;
+}
+
+// Favourites
+.no-favs {
+  margin-top: 12.5rem;
+  .section .container{
+    margin-top: -3rem;
+    margin-bottom: 6rem;
+    width: 100%;
+    .title {
+      font-size: 1.2rem;
+      width: 100%;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Single asteroid show
+.single-asteroid {
+  width: 90%;
+  margin: auto;
+  .title {
+    font-size: 1.5rem;
+  }
+  .tile .subtitle {
+    font-size: 1.2rem;
+  }
+}
+
 }

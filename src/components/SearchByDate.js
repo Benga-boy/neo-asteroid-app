@@ -93,9 +93,9 @@ const SearchByDate = () => {
 
   return (
     <Fragment>
-      <nav className="level">
+      <nav className="level search-by-date-top">
         <div className="columns">
-          <div className="column">
+          <div className="column is-half-mobile">
             <div className="level-left">
               <div className="level-item">
                 <p className="subtitle is-6">
@@ -111,7 +111,7 @@ const SearchByDate = () => {
               </div>
             </div>
           </div>
-          <div className="column">
+          <div className="column is-half-mobile">
             <div className="level-left">
               <div className="level-item">
                 <p className="subtitle is-6">
@@ -134,7 +134,7 @@ const SearchByDate = () => {
       {/* Check if data is true. if !true, display info telling the user how to fetch the data, if true, display the asteroids returned */}
       {
         data === null ? (<Fragment>
-          <section className="section is-medium">
+          <section className="section is-medium instructions">
             <div className="container box">
               <h1 className="title is-4 has-text-centered">Search for a list of Near Earth Objects within a date range</h1>
               <h2 className=" error subtitle has-text-centered">
@@ -143,7 +143,7 @@ const SearchByDate = () => {
             </div>
           </section>
         </Fragment>) : (<Fragment>
-          <section className="show-all section">
+          <section className="show-all section asteroids-index">
             <div className="container">
               <div className="columns is-multiline">
                 {limitedAsteroids && limitedAsteroids.map(item => <AsteroidCard key={item.id} item={item} addFavorite={favouriteAsteroid} user={user} />)

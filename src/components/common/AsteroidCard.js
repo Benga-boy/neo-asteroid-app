@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const AsteroidCard = ({ item, addFavorite, user }) => {
   return (
-    <div className="tile column is-one-quarter-desktop">
+    <div className="tile column asteroid-card is-one-third-desktop">
       <div className="card">
         <Link to={`/asteroids/${item.id}`} className="card-link" >
           <div className="card-content">
@@ -34,7 +34,7 @@ const AsteroidCard = ({ item, addFavorite, user }) => {
             </p>
             {user ? <button className="card-footer-item button is-small fav-btn is-danger" onClick={() => addFavorite(item)}>
               Add to favorites
-            </button> : <small className="login"><Link to="/login" >Login</Link> to add to favourites</small>}
+            </button> : <small className="login-card-footer"><Link to="/login" >Login</Link> to add to favourites</small>}
           </footer>
         </div>
       </div>

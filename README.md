@@ -75,7 +75,7 @@
 * I noticed that the catch block is not returning error messages especially in the search by date component
 * Manually handle errors myself
 * Make sure the user is not adding duplicate Asteroids into favourites
-* Add another feature to allow the user remove an Asteroid from their favourites 
+* Add another feature to allow the user remove an Asteroid from their favourites * used firebase docs for deleting data - https://firebase.google.com/docs/firestore/manage-data/delete-data. 
 ```
   const removeFavourite = item => {
     const arrayDelete = firebase.firestore.FieldValue.arrayRemove

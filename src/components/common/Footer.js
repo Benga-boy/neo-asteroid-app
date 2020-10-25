@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="content has-text-centered">
         <p>
-          <strong>Code Test</strong> by <a href="https://www.linkedin.com/in/benga-olasebikan/" target="_blank" rel="noopener noreferrer">Benga Olasebikan</a>. Scribeless Product team.
+          <strong>NASA API Project</strong> by <a href="https://www.linkedin.com/in/benga-olasebikan/" target="_blank" rel="noopener noreferrer">Benga Olasebikan</a>
         </p>
       </div>
       <div className="content has-text-centered">
